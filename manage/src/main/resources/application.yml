@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: Spring-boot-rabbitmq
+  rabbitmq:
+    host: 106.12.106.59
+    port: 5673
+    username: guest
+    password: guest
+    listener:
+      simple:
+        # 表示消费者消费成功消息以后需要手工的进行签收（ack确认），默认为 auto
+        acknowledge-mode: manual
+        # 发送者开启 return 确认机制
+        publisher-returns: true
+        # 发送者开启 confirm 确认机制
+        publisher-confirm-type: correlate
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  elasticsearch:
+    uris: http://106.12.106.59:9200
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.12.106.59:3306/claimnet?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+server:
+  port: 8081
+
+# MyBatis-Plus的设置
+# 别名包扫描路径,为路径下的所有类创建别名
+mybatis-plus:
+  type-aliases-package: tracy.manage.entity
+  # xml扫描路径。然后在Mapper接口写上自定义方法并关联XML语句，即可实现手写SQL
+  mapper-locations: classpath*:mapper/*.xml
+  # MyBatis-Plus驼峰转换，配置后不论手写SQL还是接口方法，都能自动映射（默认on）
+  configuration:
+    map-underscore-to-camel-case: on
+    # 配置生成SQL日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

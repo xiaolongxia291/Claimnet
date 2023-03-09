@@ -1,0 +1,15 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: http://175.178.113.56:9200
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  cache:
+    type: redis
+  redis:
+    host: 175.178.113.56
+    database: 0
+    port: 6379
+server:
+  port: 8080
